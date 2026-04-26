@@ -57,7 +57,7 @@ SmartFlow AI simulates an intelligent traffic control system by combining **YOLO
 ---
 
 ## Demo video:
-https://github.com/user-attachments/assets/add2223e-f04b-47fb-9262-8f30f820ade1
+https://github.com/user-attachments/assets/5f408804-afc2-44b5-ba24-28227aa3b437
 
 ---
 
