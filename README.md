@@ -113,6 +113,8 @@ smartflow-ai-traffic-system/
 ├── app.py               # Main application
 ├── utils/               # Helper functions
 ├── requirements.txt     # Dependencies
+├── frontend/            # Next.js Frontend
+├── backend/             # Flask Backend
 └── README.md
 ```
 
@@ -146,5 +148,3 @@ python app.py
 * Reinforcement learning for signal optimization
 * Multi-intersection traffic coordination
 * Dashboard for traffic visualization
-
----
