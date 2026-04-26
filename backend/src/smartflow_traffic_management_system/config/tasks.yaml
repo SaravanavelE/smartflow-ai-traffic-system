@@ -1,0 +1,70 @@
+---
+analyze_real_time_traffic_data:
+  description: Analyze current traffic conditions at {intersection_id} using camera
+    feeds, sensor data, and vehicle detection systems. Process the input data from
+    {traffic_data_source} to determine vehicle density, speed patterns, and classify
+    the current congestion level as Low, Medium, or High. Include vehicle count per
+    lane and average speeds.
+  expected_output: 'A detailed traffic analysis report in JSON format containing:
+    current vehicle density per lane, average speeds, congestion classification (Low/Medium/High),
+    and timestamps. Format: {"intersection_id": "{intersection_id}", "timestamp":
+    "ISO_format", "congestion_level": "Low/Medium/High", "vehicle_density": {"north":
+    X, "south": X, "east": X, "west": X}, "average_speeds": {"north": X, "south":
+    X, "east": X, "west": X}}'
+  agent: traffic_analyzer_agent
+detect_emergency_vehicles:
+  description: Monitor for emergency vehicles (ambulances, fire trucks, police cars)
+    approaching {intersection_id} using emergency vehicle detection systems, audio
+    sensors, and visual identification. Check for emergency signals, sirens, and emergency
+    vehicle transponders. Determine if immediate green corridor activation is needed.
+  expected_output: 'Emergency vehicle detection status in JSON format: {"intersection_id":
+    "{intersection_id}", "timestamp": "ISO_format", "emergency_detected": true/false,
+    "vehicle_type": "ambulance/fire_truck/police/none", "approach_direction": "north/south/east/west/none",
+    "estimated_arrival_time": "seconds", "green_corridor_required": true/false}'
+  agent: emergency_agent
+  async_execution: true
+generate_traffic_predictions:
+  description: Using the current traffic analysis data, predict traffic congestion
+    patterns for {intersection_id} over the next 10-15 minutes. Consider historical
+    data patterns, time of day, day of week, weather conditions, and current traffic
+    trends to forecast expected congestion levels and traffic flow changes.
+  expected_output: 'Traffic prediction forecast in JSON format: {"intersection_id":
+    "{intersection_id}", "timestamp": "ISO_format", "prediction_timeframe": "10-15
+    minutes", "predicted_congestion": {"10min": "Low/Medium/High", "15min": "Low/Medium/High"},
+    "predicted_density_changes": {"north": "+/-X%", "south": "+/-X%", "east": "+/-X%",
+    "west": "+/-X%"}, "confidence_level": "0.0-1.0"}'
+  agent: prediction_agent
+  context:
+  - analyze_real_time_traffic_data
+optimize_signal_timing:
+  description: Calculate optimal traffic signal timing for {intersection_id} based
+    on current traffic analysis, congestion predictions, and emergency vehicle detection
+    status. Determine green, yellow, and red light durations for each direction to
+    minimize total waiting time and maximize throughput. Prioritize emergency vehicles
+    if detected.
+  expected_output: 'Optimized signal timing plan in JSON format: {"intersection_id":
+    "{intersection_id}", "timestamp": "ISO_format", "signal_timing": {"north": {"green":
+    X_seconds, "yellow": X_seconds, "red": X_seconds}, "south": {"green": X_seconds,
+    "yellow": X_seconds, "red": X_seconds}, "east": {"green": X_seconds, "yellow":
+    X_seconds, "red": X_seconds}, "west": {"green": X_seconds, "yellow": X_seconds,
+    "red": X_seconds}}, "cycle_length": X_seconds, "emergency_override": true/false,
+    "optimization_reason": "description"}'
+  agent: signal_optimization_agent
+  context:
+  - analyze_real_time_traffic_data
+  - generate_traffic_predictions
+  - detect_emergency_vehicles
+process_system_feedback_and_learning:
+  description: Analyze the effectiveness of the implemented signal timing, user feedback
+    from {feedback_source}, and overall traffic performance metrics. Identify areas
+    for improvement in traffic analysis, predictions, and signal optimization. Generate
+    learning insights and recommendations for system enhancement.
+  expected_output: 'System performance analysis and learning recommendations in JSON
+    format: {"intersection_id": "{intersection_id}", "timestamp": "ISO_format", "performance_metrics":
+    {"average_wait_time": X_seconds, "throughput_improvement": "+/-X%", "user_satisfaction":
+    X/10}, "learning_insights": ["insight1", "insight2"], "recommendations": ["recommendation1",
+    "recommendation2"], "system_adjustments": {"prediction_accuracy": "+/-X%", "optimization_effectiveness":
+    "+/-X%"}}'
+  agent: feedback_learning_agent
+  context:
+  - optimize_signal_timing

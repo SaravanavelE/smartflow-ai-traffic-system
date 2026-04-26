@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 200 29% 15%;
+    --foreground: 210 20% 98%;
+    --card: 200 29% 18%;
+    --card-foreground: 210 20% 98%;
+    --popover: 200 29% 15%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 200 75% 41%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 200 25% 25%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 200 20% 25%;
+    --muted-foreground: 200 10% 70%;
+    --accent: 196 90% 63%;
+    --accent-foreground: 200 29% 15%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 200 29% 25%;
+    --input: 200 29% 25%;
+    --ring: 196 90% 63%;
+    --radius: 0.75rem;
+    --chart-1: 196 90% 63%;
+    --chart-2: 200 75% 41%;
+    --chart-3: 173 58% 39%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* ── Map utilities ─────────────────────────────────────────── */
+.map-gradient {
+  background: radial-gradient(circle at center, rgba(27, 120, 180, 0.1) 0%, transparent 70%);
+}
+
+.glow-primary {
+  box-shadow: 0 0 15px rgba(27, 120, 180, 0.4);
+}
+
+.glow-accent {
+  box-shadow: 0 0 20px rgba(70, 192, 248, 0.5);
+}
+
+/* ── Animations ───────────────────────────────────────────── */
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-from-right {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-in-from-bottom {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-from-left {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes zoom-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.animate-in {
+  animation-fill-mode: both;
+}
+
+.slide-up           { animation: slide-up 0.4s ease-out; }
+.slide-in-from-right{ animation: slide-in-from-right 0.4s ease-out; }
+.slide-in-from-left { animation: slide-in-from-left  0.4s ease-out; }
+.slide-in-from-bottom{ animation: slide-in-from-bottom 0.4s ease-out; }
+.fade-in            { animation: fade-in 0.3s ease-out; }
+.zoom-in            { animation: zoom-in 0.3s ease-out; }
+
+.duration-200 { animation-duration: 200ms; }
+.duration-300 { animation-duration: 300ms; }
+.duration-500 { animation-duration: 500ms; }
+.duration-700 { animation-duration: 700ms; }
+
+/* ── Google Maps dark overrides ──────────────────────────── */
+.gm-style .gm-style-iw-c {
+  background: #1e293b !important;
+  border: 1px solid #334155 !important;
+  border-radius: 12px !important;
+  color: white !important;
+}
+.gm-style .gm-style-iw-tc::after {
+  background: #1e293b !important;
+}
+.gm-style .gm-style-iw-d {
+  overflow: hidden !important;
+}
+.gm-ui-hover-effect > span {
+  background-color: #94a3b8 !important;
+}
